@@ -1,33 +1,33 @@
 === WebberZone Snippetz - Header, Body and Footer manager ===
-Tags: snippets, html, css, javascript, code, header, footer, content, body, feed
+Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
-Stable tag: 2.0.1
-Requires at least: 6.0
-Tested up to: 6.6
-Requires PHP: 7.3
+Stable tag: 2.1.0
+Requires at least: 6.3
+Tested up to: 6.7
+Requires PHP: 7.4
 License: GPLv2 or later
 
-The ultimate snippet manager for WordPress to create and manage custom HTML, CSS or JS code snippets.
+The ultimate snippet manager for WordPress that allows you to create and manage custom HTML, CSS, or JS code snippets and insert them in your site's header, footer, content, etc.
 
 == Description ==
 
-Do you want to customize your site with code but don’t want to edit your theme files or worry about losing your changes when you switch themes? Do you want to add analytics, site verification, custom CSS, or any other code to your site without using multiple plugins? Do you want to have full control over where and when your code snippets are displayed on your site?
+Do you want to customize your site with code but don't want to edit your theme files or worry about losing your changes when you switch themes? Do you want to add analytics, site verification, custom CSS, or any other code to your site without using multiple plugins? Do you want complete control over where and when you display your code snippets on your site?
 
-If you answered yes to any of these questions, then WebberZone Snippetz is the perfect plugin for you!
+If you answered yes to any of the above questions, WebberZone Snippetz is the perfect plugin!
 
-[WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) (formerly Add to All) is a simple, yet powerful plugin that will allow you to create and manage custom snippets of HTML, CSS or JS code and add them to your header, footer, content or feed. You can also choose where and when to display your snippets based on various criteria such as post IDs, post types, categories, tags, and more.
+[WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) (formerly Add to All) is a simple yet powerful plugin that allows you to create and manage custom snippets of HTML, CSS, or JS code and add them to your header, footer, content, or feed. You can also choose where and when to display your snippets based on criteria such as post IDs, post types, categories, tags, and more.
 
-WebberZone Snippetz comes with out of the box support for Google Analytics, Statcounter and Tynt. Additionally, it supports site verification for Google, Bing and Pinterest via their HTML tag methods.
+WebberZone Snippetz comes with out-of-the-box support for Google Analytics and Statcounter. It lets you easily add meta tags to verify your site with Google, Bing, and Pinterest.
 
-WebberZone Snippetz also enhances your site’s feed with a copyright notice and a link to the post. Plus, it comes with tons of actions and filters to extend its functionality.
+WebberZone Snippetz also enhances your site's feed with a copyright notice and a link to the post. It also comes with many actions and filters to extend its functionality.
 
 Here are some of the key features of WebberZone Snippetz:
 
 * Create custom snippets with HTML, CSS or JS code
 * Add snippets to your header, footer, content or feed
 * Choose where and when to display your snippets based on post IDs, post types, categories, tags, and more
-* Support for Google Analytics, Statcounter and Tynt
+* Support for Google Analytics and Statcounter
 * Site verification for Google, Bing and Pinterest
 * No need to edit theme files or lose changes when switching themes
 
@@ -82,13 +82,6 @@ To add custom CSS code to your site, go to Snippets > Add New in your WordPress 
 == Screenshots ==
 
 1. Snippets Manager
-2. General Options
-3. 3rd Party Options
-4. Header Options
-5. Content Options
-6. Footer Options
-7. Feed Options
-8. The display options meta box where you can choose where and when to display your snippets
 
 == Other Notes ==
 
@@ -102,35 +95,21 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 == Changelog ==
 
-= 2.0.1 =
+= 2.1.0 =
 
-* Bug fixes:
-	* Fixed "Exclude display on these post IDs"
-	* Fixed link to Settings page
-	* Fixed Content addition on Post and Pages only
-	* Admin scripts were incorrectly added on all "Add New" post screens
+Release post: [https://webberzone.com/announcements/snippetz-v2-1-0/](https://webberzone.com/announcements/snippetz-v2-1-0/)
 
-= 2.0.0 =
+* Features:
+	* New block to select and display any snippet in the block or site editor.
+	* New On/Off toggle button in the snippet screen to enable/disable a snippet.
 
-*Add to All* plugin has now been rebranded to *WebberZone Snippetz*. The plugin code has also been rewritten to use OOP.
-
-* New feature:
-	* Add Meta verification. Read how to verify your domain in the [Meta Business Help Centre](https://www.facebook.com/business/help/321167023127050)
-	* Snippet priority: New global option to set the priority of when snippets are added to the content. Additionally, the snippet screen allows settings a priority amongst other snippets that add to the content
-	* Snippet Type: New dropdown to select if the snippet is a CSS, JS or HTML snippet. If you select JS or CSS, then the `script` and `style` tags are automatically added
-	* New option to add content to the `wp_body_open()` tag
-
-* Enhancements:
-	* Google Analytics code has been updated to GA4. Please update your [Google Tag ID](https://support.google.com/analytics/answer/9539598?hl=en)
-	* *uninstall.php* now uses `get_sites()` function
-	* Settings menu link is under Snippetz menu if enabled and under Settings menu when disabled
-
-* Deprecated:
-	* Support for Tynt has been removed. If you are using Tynt, you will need to directly use the full code in the *Footer* tab.
+* Modifications:
+	* Snippets are no longer public or visible on the frontend. They are only visible in the snippet screen.
 
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
 == Upgrade Notice ==
 
-= 2.0.1 =
+= 2.1.0 =
+
 Major release; Check out the Changelog for more details.

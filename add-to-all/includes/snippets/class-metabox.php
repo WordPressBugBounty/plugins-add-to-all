@@ -70,6 +70,13 @@ class Metabox {
 	public function get_registered_settings() {
 
 		$settings = array(
+			'disable_snippet'      => array(
+				'id'      => 'disable_snippet',
+				'name'    => __( 'Disable Snippet', 'add-to-all' ),
+				'desc'    => __( 'When enabled the snippet will not be displayed.', 'add-to-all' ),
+				'type'    => 'checkbox',
+				'options' => false,
+			),
 			'snippet_type'         => array(
 				'id'      => 'snippet_type',
 				'name'    => __( 'Snippet Type', 'add-to-all' ),
@@ -193,11 +200,10 @@ class Metabox {
 		/**
 		 * Filter array of registered settings for metabox.
 		 *
-		 * @param array Registered settings.
+		 * @param array $settings Registered settings.
 		 */
 		$settings = apply_filters( $this->prefix . '_metabox_settings', $settings );
 
 		return $settings;
 	}
-
 }

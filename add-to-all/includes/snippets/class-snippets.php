@@ -25,7 +25,7 @@ class Snippets {
 	/**
 	 * Holds the WP_Post object.
 	 *
-	 * @var WP_Post Post object.
+	 * @var \WP_Post Post object.
 	 */
 	protected $post;
 
@@ -92,6 +92,24 @@ class Snippets {
 		add_filter( 'the_content', array( $this, 'remove_wpautop' ), 0 );
 		add_action( 'edit_form_after_title', array( $this, 'media_buttons' ) );
 		add_filter( 'media_view_strings', array( $this, 'media_view_strings' ), 10, 2 );
+
+		// Disable block editor for this post type.
+		add_filter( 'use_block_editor_for_post_type', array( $this, 'disable_block_editor' ), 10, 2 );
+	}
+
+	/**
+	 * Disable block editor for snippets post type.
+	 *
+	 * @param bool   $use_block_editor Whether to use block editor.
+	 * @param string $post_type        Post type.
+	 *
+	 * @return bool Whether to use block editor.
+	 */
+	public function disable_block_editor( $use_block_editor, $post_type ) {
+		if ( $this->post_type === $post_type ) {
+			return false;
+		}
+		return $use_block_editor;
 	}
 
 	/**
@@ -137,25 +155,24 @@ class Snippets {
 			'feeds'      => false,
 		);
 		$args    = array(
-			'label'               => __( 'Snippet', 'add-to-all' ),
-			'description'         => __( 'WebberZone Snippetz', 'add-to-all' ),
-			'labels'              => $labels,
-			'supports'            => array( 'title', 'editor', 'revisions', 'custom-fields' ),
-			'taxonomies'          => array( 'ata_snippets_category' ),
-			'hierarchical'        => false,
-			'public'              => true,
-			'show_ui'             => true,
-			'show_in_menu'        => true,
-			'menu_position'       => 5,
-			'menu_icon'           => 'dashicons-format-aside',
-			'show_in_admin_bar'   => true,
-			'show_in_nav_menus'   => true,
-			'can_export'          => true,
-			'has_archive'         => true,
-			'exclude_from_search' => true,
-			'publicly_queryable'  => true,
-			'rewrite'             => $rewrite,
-			'capabilities'        => array(
+			'label'                     => __( 'Snippet', 'add-to-all' ),
+			'description'               => __( 'WebberZone Snippetz', 'add-to-all' ),
+			'labels'                    => $labels,
+			'supports'                  => array( 'title', 'editor', 'revisions', 'custom-fields' ),
+			'taxonomies'                => array( 'ata_snippets_category' ),
+			'hierarchical'              => false,
+			'public'                    => false,
+			'show_ui'                   => true,
+			'menu_position'             => 5,
+			'menu_icon'                 => 'dashicons-editor-code',
+			'show_in_admin_bar'         => true,
+			'show_in_nav_menus'         => false,
+			'can_export'                => true,
+			'has_archive'               => false,
+			'exclude_from_search'       => true,
+			'publicly_queryable'        => false,
+			'rewrite'                   => $rewrite,
+			'capabilities'              => array(
 				'publish_posts'       => 'manage_options',
 				'edit_posts'          => 'manage_options',
 				'edit_others_posts'   => 'manage_options',
@@ -166,7 +183,25 @@ class Snippets {
 				'delete_post'         => 'manage_options',
 				'read_post'           => 'manage_options',
 			),
-			'show_in_rest'        => false,
+			'show_in_rest'              => true,
+			'rest_base'                 => 'snippets',
+			'rest_controller_class'     => 'WP_REST_Posts_Controller',
+			'template'                  => array(),
+			'template_lock'             => false,
+			// Add custom REST API permissions.
+			'rest_namespace'            => 'webberzone/v1',
+			'rest_meta_fields'          => array( '_ata_snippet_type' ),
+			'rest_permissions_callback' => function () {
+				// Block access if user is not logged in or not an admin.
+				if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+					return new \WP_Error(
+						'rest_forbidden',
+						esc_html__( 'You are not allowed to access this resource.', 'add-to-all' ),
+						array( 'status' => rest_authorization_required_code() )
+					);
+				}
+				return true;
+			},
 		);
 
 		/**
@@ -179,6 +214,21 @@ class Snippets {
 		$args = apply_filters( $this->post_type . '_args', $args );
 
 		register_post_type( $this->post_type, $args );
+
+		// Register meta in REST API.
+		register_post_meta(
+			$this->post_type,
+			'_ata_snippet_type',
+			array(
+				'type'          => 'string',
+				'description'   => 'Snippet type (js, css, html)',
+				'single'        => true,
+				'show_in_rest'  => true,
+				'auth_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			)
+		);
 	}
 
 	/**
@@ -275,7 +325,7 @@ class Snippets {
 	/**
 	 * Add media buttons.
 	 *
-	 * @param WP_Post $post Post object.
+	 * @param \WP_Post $post Post object.
 	 */
 	public function media_buttons( $post ) {
 		if ( get_post_type( $post ) === $this->post_type ) {
@@ -287,6 +337,7 @@ class Snippets {
 				esc_attr( $styles['color'] )
 			);
 			printf(
+				/* translators: 1: snippet type, 2: tag */
 				esc_html__( 'This is a %1$s snippet. You do not need to add %2$s tags in your code.', 'add-to-all' ),
 				'<strong>' . esc_html( strtoupper( $styles['type'] ) ) . '</strong>',
 				'<strong>' . esc_html( $styles['tag'] ) . '</strong>'
@@ -303,7 +354,7 @@ class Snippets {
 	 * Edit media strings.
 	 *
 	 * @param string[] $strings Array of media view strings keyed by the name they'll be referenced by in JavaScript.
-	 * @param  WP_Post  $post    Post object.
+	 * @param \WP_Post $post    Post object.
 	 * @return string[] Updated strings array.
 	 */
 	public function media_view_strings( $strings, $post ) {
@@ -321,7 +372,7 @@ class Snippets {
 	/**
 	 * Get snippet type.
 	 *
-	 * @param WP_Post $snippet Snippet object.
+	 * @param \WP_Post $snippet Snippet object.
 	 * @return string Snippet type.
 	 */
 	public function get_snippet_type( $snippet ) {
