@@ -1,10 +1,10 @@
 === WebberZone Snippetz - Header, Body and Footer manager ===
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
-Donate link: https://ajaydsouza.com/donate/
-Stable tag: 2.2.0
+Donate link: https://wzn.io/donate-wz
+Stable tag: 2.3.0
 Requires at least: 6.3
-Tested up to: 6.9
+Tested up to: 6.8
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -99,31 +99,32 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 == Changelog ==
 
-= 2.2.0 =
+= 2.3.0 =
 
-* Bug fixes:
-	* Fixed sanitization of shortcode and block inputs.
-
-= 2.1.1 =
-
-* Bug fixes:
-	* Fixed `_load_textdomain_just_in_time` warning/error.
-
-= 2.1.0 =
-
-Release post: [https://webberzone.com/announcements/snippetz-v2-1-0/](https://webberzone.com/announcements/snippetz-v2-1-0/)
+Release post: [https://webberzone.com/announcements/snippetz-v2-3-0/](https://webberzone.com/announcements/snippetz-v2-3-0/)
 
 * Features:
-	* New block to select and display any snippet in the block or site editor.
-	* New On/Off toggle button in the snippet screen to enable/disable a snippet.
+	* **External Minified Files:** New setting to generate and load external minified CSS/JS files instead of inline output.
+	* **File Combination:** Option to combine all CSS/JS snippets into single minified files for significantly improved page load performance.
+	* **Tools Page:** Added a new Tools page under Settings (or Snippets) to easily regenerate minified assets, clear cache, and view system and file statistics.
+	* Added support for `class` attributes in the `[ata_snippet]` shortcode (e.g. `[ata_snippet id="1" class="custom-class"]`).
 
-* Modifications:
-	* Snippets are no longer public or visible on the frontend. They are only visible in the snippet screen.
+* Improvements:
+	* Updated to latest version of WebberZone Settings API.
+	* Improved internal hook management for better reliability.
+	* Reorganized plugin architecture with strict namespaces and autoloading.
+	* Applied global `snippet_priority` option to `wp_head` and `wp_footer` hooks for better execution order control.
+	* Custom CSS (Header CSS setting) is now enqueued via `wp_add_inline_style` instead of a raw `<style>` tag, following WordPress best practices.
+	* CSS/JS snippets are now exclusively enqueued via `wp_enqueue_scripts`, eliminating redundant processing during `wp_head`/`wp_footer` that could cause incorrect output timing.
+	* Admin column styles are now enqueued via `wp_add_inline_style` on `admin_enqueue_scripts` instead of a raw `<style>` tag in `admin_head`.
+
+* Bug fixes:
+	* Fixed content display settings for post exclusions.
+	* Corrected multiple `@since` tag references in internal options API documentation.
 
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
 == Upgrade Notice ==
 
-= 2.2.0 =
-
-Security release.
+= 2.3.0 =
+New features including external minified CSS/JS files generation, file combination, a dedicated tools page, and significant architectural performance improvements.
