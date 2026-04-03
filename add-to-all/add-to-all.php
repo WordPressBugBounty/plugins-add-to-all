@@ -14,7 +14,7 @@
  *
  * @wordpress-plugin
  * Plugin Name: WebberZone Snippetz - Header, Body and Footer manager
- * Version:     2.3.0
+ * Version:     2.3.1
  * Plugin URI:  https://webberzone.com/plugins/add-to-all/
  * Description: A simple yet powerful plugin that allows you to insert any code snippet or script into WordPress.
  * Author:      Ajay D'Souza
@@ -32,7 +32,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 if ( ! defined( 'WZ_SNIPPETZ_VERSION' ) ) {
-	define( 'WZ_SNIPPETZ_VERSION', '2.3.0' );
+	define( 'WZ_SNIPPETZ_VERSION', '2.3.1' );
 }
 
 if ( ! defined( 'WZ_SNIPPETZ_FILE' ) ) {
@@ -56,6 +56,13 @@ if ( file_exists( $composer_autoload ) ) {
 	require_once $composer_autoload;
 }
 
+/*
+ *----------------------------------------------------------------------------
+ * Include files
+ *----------------------------------------------------------------------------
+ */
+require_once plugin_dir_path( __FILE__ ) . 'includes/options-api.php';
+
 /**
  * The main function responsible for returning the one true WebberZone Snippetz instance to functions everywhere.
  */
@@ -75,10 +82,3 @@ if ( ! function_exists( 'snippetz' ) ) {
 		return \WebberZone\Snippetz\Main::get_instance();
 	}
 }
-
-/*
- *----------------------------------------------------------------------------
- * Include files
- *----------------------------------------------------------------------------
- */
-require_once plugin_dir_path( __FILE__ ) . 'includes/options-api.php';

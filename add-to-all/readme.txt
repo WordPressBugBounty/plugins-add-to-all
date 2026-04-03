@@ -2,7 +2,7 @@
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
 Donate link: https://wzn.io/donate-wz
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -95,9 +95,15 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 * [Top 10](https://wordpress.org/plugins/top-10/) - Track daily and total visits on your blog posts and display the popular and trending posts
 * [Knowledge Base](https://wordpress.org/plugins/knowledgebase/) - Create a knowledge base or FAQ section on your WordPress site
 * [Better Search](https://wordpress.org/plugins/better-search/) - Enhance the default WordPress search with contextual results sorted by relevance
+* [WebberZone Link Warnings](https://wordpress.org/plugins/webberzone-link-warnings/) - Add accessible warnings for external links and target="_blank" links
 * [Auto-Close](https://wordpress.org/plugins/autoclose/) - Automatically close comments, pingbacks and trackbacks and manage revisions
 
 == Changelog ==
+
+= 2.3.1 =
+
+* Bug fixes:
+	* Fixed missing method referenced in hook registration in class-main.php
 
 = 2.3.0 =
 
@@ -126,5 +132,5 @@ Check changelog.txt for older entries the [Releases page on Github](https://gith
 
 == Upgrade Notice ==
 
-= 2.3.0 =
-New features including external minified CSS/JS files generation, file combination, a dedicated tools page, and significant architectural performance improvements.
+= 2.3.1 =
+Bug fix for PHPUnit bootstrap error.
