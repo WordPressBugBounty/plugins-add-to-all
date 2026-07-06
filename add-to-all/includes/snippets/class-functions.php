@@ -810,7 +810,7 @@ class Functions {
 
 		$count = 0;
 		foreach ( $snippets as $snippet ) {
-			if ( $snippet instanceof \WP_Post && self::generate_snippet_file( $snippet->ID, $snippet ) ) {
+			if ( self::generate_snippet_file( $snippet->ID, $snippet ) ) {
 				++$count;
 			}
 		}
@@ -825,6 +825,10 @@ class Functions {
 	 * @param \WP_Post $post    Post object.
 	 */
 	public function save_snippet_file( $post_id, $post ) {
+		if ( wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
+			return;
+		}
+
 		self::generate_snippet_file( $post_id, $post );
 
 		if ( ata_get_option( 'enable_combination' ) ) {
