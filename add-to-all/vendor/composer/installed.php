@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'webberzone/add-to-all',
-        'pretty_version' => '2.4.3',
-        'version' => '2.4.3.0',
+        'pretty_version' => '2.4.4',
+        'version' => '2.4.4.0',
         'reference' => null,
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'matthiasmullie/minify' => array(
-            'pretty_version' => '1.3.75',
-            'version' => '1.3.75.0',
-            'reference' => '76ba4a5f555fd7bf4aa408af608e991569076671',
+            'pretty_version' => '1.3.76',
+            'version' => '1.3.76.0',
+            'reference' => 'bbd1844c257a49488d914f4c7c7ba74cc8861fdc',
             'type' => 'library',
             'install_path' => __DIR__ . '/../matthiasmullie/minify',
             'aliases' => array(),
@@ -29,8 +29,8 @@
             'dev_requirement' => false,
         ),
         'webberzone/add-to-all' => array(
-            'pretty_version' => '2.4.3',
-            'version' => '2.4.3.0',
+            'pretty_version' => '2.4.4',
+            'version' => '2.4.4.0',
             'reference' => null,
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
