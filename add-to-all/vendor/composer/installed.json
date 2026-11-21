@@ -29,6 +29,7 @@
                 "psr/cache-implementation": "Cache implementation to use with Minify::cache"
             },
             "time": "2026-11-03T11:28:38+00:00",
+            "published-time": "2026-11-03T11:29:19+00:00",
             "bin": [
                 "bin/minifycss",
                 "bin/minifyjs"
